@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Франшиза «Живая Планета» — скоро запуск | zoofranshiza.ru</title>
+  <meta name="description" content="Официальный сайт франшизы сети магазинов «Живая Планета» находится в разработке. Скоро здесь появится полная информация для партнёров." />
+  <meta name="theme-color" content="#eff7ec" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Франшиза «Живая Планета» — скоро запуск" />
+  <meta property="og:description" content="Сайт франшизы сети магазинов «Живая Планета» находится в разработке." />
+  <meta property="og:url" content="https://zoofranshiza.ru/" />
+  <meta property="og:image" content="https://zoofranshiza.ru/images/icongreen.svg" />
+  <link rel="icon" type="image/svg+xml" href="images/icongreen.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f4f8f2;
+      --bg-soft: #ebf7e6;
+      --panel: rgba(255, 255, 255, 0.74);
+      --panel-strong: rgba(255, 255, 255, 0.9);
+      --text: #122216;
+      --text-soft: #3f5544;
+      --brand: #0f8f45;
+      --brand-deep: #0a6831;
+      --accent: #f9c44f;
+      --line: rgba(15, 143, 69, 0.2);
+      --shadow: 0 20px 60px rgba(12, 38, 18, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 550px at 8% -5%, rgba(15, 143, 69, 0.18), transparent 62%),
+        radial-gradient(1000px 520px at 100% 0%, rgba(249, 196, 79, 0.24), transparent 58%),
+        radial-gradient(880px 500px at 50% 100%, rgba(15, 143, 69, 0.12), transparent 60%),
+        var(--bg);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(transparent 96%, rgba(15, 143, 69, 0.06) 100%);
+      background-size: 100% 28px;
+      opacity: 0.2;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, 92vw);
+      margin: 28px auto;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 30px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(2px);
+      pointer-events: none;
+    }
+
+    .orb.one {
+      width: 220px;
+      height: 220px;
+      right: -45px;
+      top: -40px;
+      background: radial-gradient(circle at 30% 30%, rgba(15, 143, 69, 0.7), rgba(15, 143, 69, 0));
+      animation: drift 9s ease-in-out infinite;
+    }
+
+    .orb.two {
+      width: 260px;
+      height: 260px;
+      left: -70px;
+      bottom: -90px;
+      background: radial-gradient(circle at 40% 35%, rgba(249, 196, 79, 0.5), rgba(249, 196, 79, 0));
+      animation: drift 11s ease-in-out infinite reverse;
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 34px;
+    }
+
+    .domain {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #0e5228;
+    }
+
+    .domain::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 6px rgba(15, 143, 69, 0.14);
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+      font-weight: 700;
+      color: #0d5f2e;
+    }
+
+    .status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-media {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--panel);
+      backdrop-filter: blur(8px);
+      padding: 28px;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      width: min(270px, 60vw);
+      max-width: 100%;
+      height: auto;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(249, 196, 79, 0.5);
+      background: rgba(249, 196, 79, 0.2);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #7a5100;
+    }
+
+    h1 {
+      font-family: "Unbounded", sans-serif;
+      font-size: clamp(30px, 4.1vw, 50px);
+      line-height: 1.13;
+      letter-spacing: -0.03em;
+      max-width: 14ch;
+    }
+
+    .lead {
+      color: var(--text-soft);
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+
+    .facts {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .facts li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+      color: #1e3d27;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .facts li::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #26b55f, #08863d);
+      flex-shrink: 0;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 10px 18px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #1cb15a, #0a863e);
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(14, 106, 49, 0.26);
+    }
+
+    .btn-ghost {
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.72);
+      color: #1b3b25;
+    }
+
+    .hero-media {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .media-frame {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 1.05 / 1;
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+    }
+
+    .media-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(8, 30, 14, 0.05) 15%, rgba(8, 30, 14, 0.58) 100%),
+        linear-gradient(90deg, rgba(15, 143, 69, 0.22) 0%, rgba(15, 143, 69, 0) 45%);
+    }
+
+    .media-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.04);
+    }
+
+    .media-caption {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 14px;
+      z-index: 1;
+      color: #f7fef9;
+    }
+
+    .media-caption strong {
+      display: block;
+      font-size: 15px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      opacity: 0.96;
+    }
+
+    .media-caption p {
+      font-size: 15px;
+      line-height: 1.4;
+      max-width: 34ch;
+      opacity: 0.95;
+    }
+
+    .launch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .launch-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      background: var(--panel-strong);
+    }
+
+    .launch-card .label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+      color: #54735d;
+      margin-bottom: 6px;
+    }
+
+    .launch-card .value {
+      font-family: "Unbounded", sans-serif;
+      font-size: clamp(20px, 2.5vw, 30px);
+      letter-spacing: -0.02em;
+      color: var(--brand-deep);
+    }
+
+    .launch-card .hint {
+      margin-top: 4px;
+      color: #4e6755;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .bottom {
+      margin-top: 20px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 16px 18px;
+      color: #355341;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: rise 0.7s ease forwards;
+      animation-delay: var(--delay, 0s);
+    }
+
+    @keyframes rise {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.3);
+        opacity: 0.6;
+      }
+    }
+
+    @keyframes drift {
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0);
+      }
+      50% {
+        transform: translate3d(0, -14px, 0);
+      }
+    }
+
+    @media (max-width: 1000px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-media {
+        padding: 22px;
+      }
+
+      .facts {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: 94vw;
+        margin: 14px auto;
+        padding: 14px;
+        border-radius: 22px;
+      }
+
+      .top {
+        margin-bottom: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .domain,
+      .status {
+        font-size: 13px;
+      }
+
+      .hero-copy,
+      .hero-media {
+        border-radius: 18px;
+        padding: 16px;
+      }
+
+      h1 {
+        font-size: clamp(26px, 9vw, 36px);
+      }
+
+      .launch {
+        grid-template-columns: 1fr;
+      }
+
+      .media-frame {
+        aspect-ratio: 4 / 5;
+      }
+
+      .actions {
+        width: 100%;
+      }
+
+      .btn {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <span class="orb one"></span>
+    <span class="orb two"></span>
+
+    <header class="top reveal" style="--delay: .03s">
+      <div class="domain">zoofranshiza.ru</div>
+      <div class="status">Сайт в разработке</div>
+    </header>
+
+    <section class="hero">
+      <article class="hero-copy reveal" style="--delay: .12s">
+        <div class="brand">
+          <img class="brand-icon" src="images/icongreen.svg" alt="Логотип Живая Планета" />
+          <img class="brand-text" src="images/text.svg" alt="Живая Планета" />
+        </div>
+
+        <span class="eyebrow">Франшиза сети магазинов</span>
+
+        <h1>Запускаем сайт франшизы «Живая Планета»</h1>
+
+        <p class="lead">
+          Мы готовим отдельную платформу для будущих партнёров. Здесь появятся условия франшизы,
+          финансовая модель, поддержка на старте и пошаговый путь запуска магазина.
+        </p>
+
+        <ul class="facts">
+          <li>Сеть зоомагазинов и ветаптек</li>
+          <li>8 действующих магазинов</li>
+          <li>Работающая операционная модель</li>
+          <li>Скоро откроем приём заявок</li>
+        </ul>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="mailto:franchise@zoofranshiza.ru">Связаться по франшизе</a>
+          <a class="btn btn-ghost" href="https://lifepzoo.ru/" target="_blank" rel="noopener noreferrer">Посмотреть действующую сеть</a>
+        </div>
+      </article>
+
+      <aside class="hero-media reveal" style="--delay: .24s">
+        <div class="media-frame">
+          <img src="images/store-bg.webp" alt="Магазин сети Живая Планета" loading="eager" decoding="async" />
+          <div class="media-caption">
+            <strong>Живая Планета</strong>
+            <p>Франшиза сети магазинов для тех, кто хочет развивать сильный зоо-бизнес в своём городе.</p>
+          </div>
+        </div>
+
+        <div class="launch">
+          <div class="launch-card">
+            <span class="label">Статус</span>
+            <div class="value">Скоро</div>
+            <p class="hint">Идёт финальная сборка сайта и франчайзингового пакета.</p>
+          </div>
+
+          <div class="launch-card">
+            <span class="label">Домен</span>
+            <div class="value">.ru</div>
+            <p class="hint">Официальная страница франшизы сети «Живая Планета».</p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="bottom reveal" style="--delay: .34s">
+      © <span id="year"></span> zoofranshiza.ru. Франшиза сети магазинов «Живая Планета».
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
