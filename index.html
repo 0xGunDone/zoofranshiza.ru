@@ -372,6 +372,150 @@
       line-height: 1.35;
     }
 
+    .game {
+      margin-top: 20px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--panel);
+      backdrop-filter: blur(8px);
+      padding: 20px;
+    }
+
+    .game-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .game-head h2 {
+      font-family: "Unbounded", sans-serif;
+      font-size: clamp(18px, 2.4vw, 28px);
+      letter-spacing: -0.02em;
+    }
+
+    .game-start {
+      min-width: 130px;
+      min-height: 42px;
+      font-size: 14px;
+      padding: 8px 14px;
+      border-radius: 12px;
+    }
+
+    .game-desc {
+      color: #3d5947;
+      font-size: 15px;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .game-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .game-stat {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel-strong);
+      padding: 10px 12px;
+    }
+
+    .game-stat .label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+      color: #58735f;
+      margin-bottom: 6px;
+    }
+
+    .game-stat .value {
+      font-family: "Unbounded", sans-serif;
+      font-size: clamp(16px, 2vw, 24px);
+      color: var(--brand-deep);
+    }
+
+    .game-field {
+      position: relative;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+      min-height: 280px;
+      background:
+        radial-gradient(440px 180px at 80% 0%, rgba(249, 196, 79, 0.3), transparent 70%),
+        radial-gradient(380px 220px at 0% 100%, rgba(15, 143, 69, 0.22), transparent 70%),
+        linear-gradient(160deg, #f7fff4 0%, #eaf8e5 100%);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+    }
+
+    .game-field::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at center, rgba(15, 143, 69, 0.12) 1px, transparent 1px);
+      background-size: 22px 22px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .pet-target {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      width: 56px;
+      height: 56px;
+      border: 0;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #ffffff, #eef9ea);
+      box-shadow: 0 8px 24px rgba(12, 57, 27, 0.2);
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      z-index: 1;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .pet-target:hover:not(:disabled) {
+      transform: scale(1.08);
+      box-shadow: 0 12px 26px rgba(12, 57, 27, 0.24);
+    }
+
+    .pet-target:active:not(:disabled) {
+      transform: scale(0.95);
+    }
+
+    .pet-target:disabled {
+      opacity: 0.7;
+      cursor: default;
+    }
+
+    .game-overlay {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 20px;
+      font-weight: 700;
+      color: #19462c;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.78));
+      transition: opacity 0.24s ease, visibility 0.24s ease;
+      z-index: 2;
+    }
+
+    .game-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
     .bottom {
       margin-top: 20px;
       border-radius: 18px;
@@ -432,6 +576,14 @@
       .facts {
         grid-template-columns: 1fr;
       }
+
+      .game {
+        padding: 18px;
+      }
+
+      .game-field {
+        min-height: 240px;
+      }
     }
 
     @media (max-width: 640px) {
@@ -477,6 +629,35 @@
 
       .btn {
         flex: 1 1 100%;
+      }
+
+      .game {
+        border-radius: 18px;
+        padding: 16px;
+      }
+
+      .game-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .game-start {
+        width: 100%;
+      }
+
+      .game-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .game-field {
+        min-height: 220px;
+        border-radius: 16px;
+      }
+
+      .pet-target {
+        width: 52px;
+        height: 52px;
+        font-size: 26px;
       }
     }
   </style>
@@ -545,6 +726,37 @@
       </aside>
     </section>
 
+    <section class="game reveal" style="--delay: .30s" aria-label="Мини-игра на тему животных">
+      <div class="game-head">
+        <h2>Мини-игра «Поймай питомца»</h2>
+        <button id="gameStart" class="btn btn-primary game-start" type="button">Старт</button>
+      </div>
+
+      <p class="game-desc">
+        Кликайте по появляющемуся питомцу и наберите максимум очков за 20 секунд.
+      </p>
+
+      <div class="game-stats">
+        <div class="game-stat">
+          <span class="label">Очки</span>
+          <div id="scoreValue" class="value">0</div>
+        </div>
+        <div class="game-stat">
+          <span class="label">Время</span>
+          <div id="timeValue" class="value">20</div>
+        </div>
+        <div class="game-stat">
+          <span class="label">Рекорд</span>
+          <div id="bestValue" class="value">0</div>
+        </div>
+      </div>
+
+      <div class="game-field" id="gameField">
+        <button id="petTarget" class="pet-target" type="button" aria-label="Поймать питомца">🐾</button>
+        <div id="gameOverlay" class="game-overlay">Нажмите «Старт», чтобы начать игру</div>
+      </div>
+    </section>
+
     <footer class="bottom reveal" style="--delay: .34s">
       © <span id="year"></span> zoofranshiza.ru. Франшиза сети магазинов «Живая Планета».
     </footer>
@@ -552,6 +764,133 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    (function () {
+      const gameDuration = 20;
+      const moveDelayMs = 700;
+      const pets = ["🐶", "🐱", "🐰", "🐹", "🦜", "🐟", "🐾"];
+      const bestStorageKey = "zoofranshiza_pet_game_best";
+
+      const field = document.getElementById("gameField");
+      const target = document.getElementById("petTarget");
+      const startButton = document.getElementById("gameStart");
+      const overlay = document.getElementById("gameOverlay");
+
+      const scoreValue = document.getElementById("scoreValue");
+      const timeValue = document.getElementById("timeValue");
+      const bestValue = document.getElementById("bestValue");
+
+      let score = 0;
+      let timeLeft = gameDuration;
+      let bestScore = Number(localStorage.getItem(bestStorageKey) || 0);
+      let isRunning = false;
+      let timerId = null;
+      let moveId = null;
+
+      function randomPet() {
+        return pets[Math.floor(Math.random() * pets.length)];
+      }
+
+      function showOverlay(text) {
+        overlay.textContent = text;
+        overlay.classList.remove("hidden");
+      }
+
+      function hideOverlay() {
+        overlay.classList.add("hidden");
+      }
+
+      function updateStats() {
+        scoreValue.textContent = String(score);
+        timeValue.textContent = String(timeLeft);
+        bestValue.textContent = String(bestScore);
+      }
+
+      function moveTarget() {
+        const fieldRect = field.getBoundingClientRect();
+        const targetRect = target.getBoundingClientRect();
+        const padding = 6;
+
+        const maxX = Math.max(padding, fieldRect.width - targetRect.width - padding);
+        const maxY = Math.max(padding, fieldRect.height - targetRect.height - padding);
+
+        const nextX = padding + Math.random() * (maxX - padding);
+        const nextY = padding + Math.random() * (maxY - padding);
+
+        target.style.left = nextX + "px";
+        target.style.top = nextY + "px";
+        target.textContent = randomPet();
+      }
+
+      function stopGame() {
+        isRunning = false;
+        clearInterval(timerId);
+        clearInterval(moveId);
+        timerId = null;
+        moveId = null;
+        target.disabled = true;
+        startButton.textContent = "Старт";
+
+        if (score > bestScore) {
+          bestScore = score;
+          localStorage.setItem(bestStorageKey, String(bestScore));
+        }
+
+        updateStats();
+        showOverlay("Время вышло. Ваш счёт: " + score + ". Нажмите «Старт», чтобы сыграть ещё раз.");
+      }
+
+      function startGame() {
+        score = 0;
+        timeLeft = gameDuration;
+        isRunning = true;
+
+        startButton.textContent = "Идёт игра";
+        target.disabled = false;
+        updateStats();
+        hideOverlay();
+        moveTarget();
+
+        timerId = setInterval(function () {
+          timeLeft -= 1;
+          updateStats();
+          if (timeLeft <= 0) {
+            stopGame();
+          }
+        }, 1000);
+
+        moveId = setInterval(function () {
+          if (isRunning) {
+            moveTarget();
+          }
+        }, moveDelayMs);
+      }
+
+      startButton.addEventListener("click", function () {
+        if (isRunning) {
+          return;
+        }
+        startGame();
+      });
+
+      target.addEventListener("click", function () {
+        if (!isRunning) {
+          return;
+        }
+        score += 1;
+        updateStats();
+        moveTarget();
+      });
+
+      window.addEventListener("resize", function () {
+        if (isRunning) {
+          moveTarget();
+        }
+      });
+
+      target.disabled = true;
+      updateStats();
+    })();
   </script>
 </body>
 </html>
